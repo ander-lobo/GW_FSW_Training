@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gcsb.Connect.Training.Webapi", "Gcsb.Connect.Training.Webapi\Gcsb.Connect.Training.Webapi.csproj", "{F8F22764-D2FA-4CD5-B6A1-B20A2865A3E9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gcsb.Connect.Training.Domain", "Gcsb.Connect.Training.Domain\Gcsb.Connect.Training.Domain.csproj", "{C3173A89-D125-4AC5-B908-6028249D1516}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gcsb.Connect.Training.Application", "Gcsb.Connect.Training.Application\Gcsb.Connect.Training.Application.csproj", "{BAD952F3-3598-4E47-9CFE-D25B6A232422}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gcsb.Connect.Training.Infrastructure", "Gcsb.Connect.Training.Infrastructure\Gcsb.Connect.Training.Infrastructure.csproj", "{47D52901-E76D-482A-95C7-01DB90486B53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gcsb.Connect.Training.Tests", "Gcsb.Connect.Training.Tests\Gcsb.Connect.Training.Tests.csproj", "{CF0E5A7A-5B52-4507-85E5-1B35FD5223FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C4BDFF1A-D541-430F-B750-D8A6823C8574}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{83F07A21-65C8-4E06-9A07-7C7BDFE2105C}"
+	ProjectSection(SolutionItems) = preProject
+		nuget.config = nuget.config
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8F22764-D2FA-4CD5-B6A1-B20A2865A3E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F22764-D2FA-4CD5-B6A1-B20A2865A3E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8F22764-D2FA-4CD5-B6A1-B20A2865A3E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F22764-D2FA-4CD5-B6A1-B20A2865A3E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3173A89-D125-4AC5-B908-6028249D1516}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3173A89-D125-4AC5-B908-6028249D1516}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3173A89-D125-4AC5-B908-6028249D1516}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3173A89-D125-4AC5-B908-6028249D1516}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAD952F3-3598-4E47-9CFE-D25B6A232422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAD952F3-3598-4E47-9CFE-D25B6A232422}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAD952F3-3598-4E47-9CFE-D25B6A232422}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAD952F3-3598-4E47-9CFE-D25B6A232422}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47D52901-E76D-482A-95C7-01DB90486B53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47D52901-E76D-482A-95C7-01DB90486B53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47D52901-E76D-482A-95C7-01DB90486B53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47D52901-E76D-482A-95C7-01DB90486B53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF0E5A7A-5B52-4507-85E5-1B35FD5223FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF0E5A7A-5B52-4507-85E5-1B35FD5223FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF0E5A7A-5B52-4507-85E5-1B35FD5223FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF0E5A7A-5B52-4507-85E5-1B35FD5223FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CF0E5A7A-5B52-4507-85E5-1B35FD5223FC} = {C4BDFF1A-D541-430F-B750-D8A6823C8574}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1EEDA5A9-873F-4CE8-8448-2B94F5BD6FD3}
+	EndGlobalSection
+EndGlobal
