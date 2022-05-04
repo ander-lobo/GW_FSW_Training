@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  gcsb.connect.training.webapi:
+    image: ${DOCKER_REGISTRY-}postgres
+    build:
+      context: .
+      dockerfile: Gcsb.Connect.Training.Webapi/Dockerfile
+    networks:
+      - gcsb.connect.training.network

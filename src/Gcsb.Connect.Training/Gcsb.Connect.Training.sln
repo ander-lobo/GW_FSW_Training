@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gcsb.Connect.Training.Webap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gcsb.Connect.Training.Domain", "Gcsb.Connect.Training.Domain\Gcsb.Connect.Training.Domain.csproj", "{C3173A89-D125-4AC5-B908-6028249D1516}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gcsb.Connect.Training.Application", "Gcsb.Connect.Training.Application\Gcsb.Connect.Training.Application.csproj", "{BAD952F3-3598-4E47-9CFE-D25B6A232422}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gcsb.Connect.Training.Application", "Gcsb.Connect.Training.Application\Gcsb.Connect.Training.Application.csproj", "{BAD952F3-3598-4E47-9CFE-D25B6A232422}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gcsb.Connect.Training.Infrastructure", "Gcsb.Connect.Training.Infrastructure\Gcsb.Connect.Training.Infrastructure.csproj", "{47D52901-E76D-482A-95C7-01DB90486B53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gcsb.Connect.Training.Infrastructure", "Gcsb.Connect.Training.Infrastructure\Gcsb.Connect.Training.Infrastructure.csproj", "{47D52901-E76D-482A-95C7-01DB90486B53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gcsb.Connect.Training.Tests", "Gcsb.Connect.Training.Tests\Gcsb.Connect.Training.Tests.csproj", "{CF0E5A7A-5B52-4507-85E5-1B35FD5223FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gcsb.Connect.Training.Tests", "Gcsb.Connect.Training.Tests\Gcsb.Connect.Training.Tests.csproj", "{CF0E5A7A-5B52-4507-85E5-1B35FD5223FC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C4BDFF1A-D541-430F-B750-D8A6823C8574}"
 EndProject
@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 	ProjectSection(SolutionItems) = preProject
 		nuget.config = nuget.config
 	EndProjectSection
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{45B0D6D1-6A7F-490A-ADE0-933350141899}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +48,10 @@ Global
 		{CF0E5A7A-5B52-4507-85E5-1B35FD5223FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF0E5A7A-5B52-4507-85E5-1B35FD5223FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF0E5A7A-5B52-4507-85E5-1B35FD5223FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45B0D6D1-6A7F-490A-ADE0-933350141899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45B0D6D1-6A7F-490A-ADE0-933350141899}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45B0D6D1-6A7F-490A-ADE0-933350141899}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45B0D6D1-6A7F-490A-ADE0-933350141899}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
