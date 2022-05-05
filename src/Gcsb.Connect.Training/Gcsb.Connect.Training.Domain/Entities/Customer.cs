@@ -21,6 +21,22 @@ namespace Gcsb.Connect.Training.Domain.Entities
         public DateTime RegistrationDate { get; private set; }
         public bool IsActive { get; private set; }
 
+        public Customer(string name, string birthDate, string rg, string cpf, string address, string city, string state, int postalCode)
+        {
+            Id = Guid.NewGuid();
+            Name = name;
+            BirthDate = birthDate;
+            Rg = rg;
+            Cpf = Regex.Replace(cpf, "[^0-9]", "");
+            Address = address;
+            City = city;
+            State = state;
+            PostalCode = postalCode;
+            RegistrationDate = DateTime.Today;
+            IsActive = true;
+
+            Validate(this, new CustomerValidator());
+        }
         public Customer(Guid id, string name, string birthDate, string rg, string cpf, string address, string city, string state, int postalCode)
         {
             Id = id;

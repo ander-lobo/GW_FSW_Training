@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Gcsb.Connect.Training.Infrastructure.Modules;
+using Gcsb.Connect.Training.Webapi.Module;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace Gcsb.Connect.Training.Tests
         {
             builder.RegisterModule<ApplicationModule>();
             builder.RegisterModule<InfrastructureModule>();
-            //builder.RegisterModule<WebapiModule>();
+            builder.RegisterModule<WebapiModule>();
 
             SetMockedDependencies(builder);
         }

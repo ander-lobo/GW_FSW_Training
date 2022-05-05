@@ -1,5 +1,5 @@
 ﻿using FluentValidation.Results;
-using Gcsb.Connect.Training.Infrastructure.Database.Entities;
+using Gcsb.Connect.Training.Domain.Entities;
 using Gcsb.Connect.Training.Infrastructure.Database.Map;
 using Microsoft.EntityFrameworkCore;
 using System;

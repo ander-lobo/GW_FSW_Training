@@ -16,7 +16,7 @@ namespace Gcsb.Connect.Training.Infrastructure.Database.Map
             builder.HasKey(c => c.Id);
             builder.Property(c => c.Name).HasMaxLength(100).IsRequired();
             builder.Property(c => c.BirthDate).HasMaxLength(10).IsRequired();
-            builder.Property(c => c.Rg).HasMaxLength(12).IsRequired();
+            builder.Property(c => c.Rg).HasMaxLength(20).IsRequired();
             builder.Property(c => c.Cpf).HasMaxLength(11).IsRequired();
             builder.Property(c => c.Address).HasMaxLength(200).IsRequired();
             builder.Property(c => c.City).HasMaxLength(30).IsRequired();

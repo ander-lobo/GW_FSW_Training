@@ -31,7 +31,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Database\Migration\" />
-	  <Folder Include="Database\Repository\" />
 	</ItemGroup>
 
 </Project>
