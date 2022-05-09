@@ -6,53 +6,76 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Gcsb.Connect.Training.Application.UseCases;
 
 namespace Gcsb.Connect.Training.Infrastructure.Database.Repository
 {
     public class CustomerRepository : ICustomerRepository
     {
-        private readonly Context _context;
+        private readonly IMapper mapper;
 
-        public CustomerRepository(Context context) 
+        public CustomerRepository(IMapper mapper) 
         { 
-            _context = context;
+            this.mapper = mapper;
         }
 
-        public async Task<List<Customer>> GetCustomers()
+        public List<Customer> GetCustomers()
         {
-            return await _context.Customers.ToListAsync();
+            using var context = new Context();
+            var customers = context.Customers.ToList();
+            return mapper.Map<List<Customer>>(customers);
         }
 
-        public async Task<Customer> GetCustomersById(Guid? Id)
+        public Customer GetCustomersById(Guid? Id)
         {
-            return await _context.Customers.FindAsync(Id);
+            using var context = new Context();
+            var customer = context.Customers.Find(Id);
+            return mapper.Map<Customer>(customer);
         }
 
-        public async Task<Customer> GetCustomersByName(string? Name)
+        public Customer GetCustomersByCpf(string? Cpf)
         {
-            return await _context.Customers.FindAsync(Name);
-        }
-
-        public async Task<Customer> GetCustomersByCpf(string? Cpf)
-        {
-            return await _context.Customers.FindAsync(Cpf);
+            using var context = new Context();
+            var customer = context.Customers.FirstOrDefault(c => c.Cpf.Equals(Cpf));
+            return mapper.Map<Customer>(customer);
         }
 
         public void AddCustomer(Customer customer)
         {
-            _context.Add(customer);
-            _context.SaveChanges();
+            using var context = new Context();
+            context.Add(mapper.Map<Entities.Customer>(customer));
+            context.SaveChanges();
         }
-        public void UpdateCustomer(Customer customer)
+        public void UpdateCustomer(Customer customer, Customer verify)
         {
-            _context.Update(customer);
-            _context.SaveChanges();
+            using var context = new Context();
+            var cep = verify.PostalCode;
+            if(customer.PostalCode != verify.PostalCode) { cep = customer.PostalCode; };
+            Entities.Customer edit = new()
+            {
+                Id = customer.Id,
+                Name = string.IsNullOrEmpty(customer.Name) ? verify.Name : customer.Name,
+                BirthDate = string.IsNullOrEmpty(customer.BirthDate) ? verify.BirthDate : customer.BirthDate,
+                Rg = string.IsNullOrEmpty(customer.Rg) ? verify.Rg : customer.Rg,
+                Cpf = verify.Cpf,
+                Address = string.IsNullOrEmpty(customer.Address) ? verify.Address : customer.Address,
+                City = string.IsNullOrEmpty(customer.City) ? verify.City : customer.City,
+                State = string.IsNullOrEmpty(customer.State) ? verify.State : customer.State,
+                PostalCode = cep,
+                RegistrationDate = verify.RegistrationDate,
+                IsActive = verify.IsActive
+            };
+            var mapped = mapper.Map<Entities.Customer>(edit);
+            context.Update(mapped);
+            context.SaveChanges();
         }
 
         public void DeleteCustomer(Customer customer)
         {
-            _context.Remove(customer);
-            _context.SaveChanges();
+            using var context = new Context();
+            context.Remove(mapper.Map<Entities.Customer>(customer));
+            context.SaveChanges();
         }
 
     }

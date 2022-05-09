@@ -7,6 +7,8 @@
     <UserSecretsId>00760f33-f837-4323-8432-af254b308c6c</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,19 +21,18 @@
 	<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.16.0" />
 	<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.3" />
 	<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
-	<PackageReference Include="Gcsb.Connect.Pkg.Serilog" Version="1.1.101" />
+	<PackageReference Include="Gcsb.Connect.Pkg.Serilog" Version="1.0.6" />
 	<PackageReference Include="Gcsb.Connect.Pkg.Startup" Version="1.4.0" />
 	<PackageReference Include="Gscb.Connect.Pkg.Authentication" Version="1.0.3" />
+	<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.3.1" />
+	<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.3.1" />
+	<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.3.1" />
   </ItemGroup>
 	
   <ItemGroup>
     <ProjectReference Include="..\Gcsb.Connect.Training.Application\Gcsb.Connect.Training.Application.csproj" />
     <ProjectReference Include="..\Gcsb.Connect.Training.Domain\Gcsb.Connect.Training.Domain.csproj" />
     <ProjectReference Include="..\Gcsb.Connect.Training.Infrastructure\Gcsb.Connect.Training.Infrastructure.csproj" />
-  </ItemGroup>
-	
-  <ItemGroup>
-    <Folder Include="UseCases\" />
   </ItemGroup>
 
 </Project>

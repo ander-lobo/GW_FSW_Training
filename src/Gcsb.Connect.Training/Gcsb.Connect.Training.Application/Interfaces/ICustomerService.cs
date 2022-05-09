@@ -1,4 +1,5 @@
 ﻿using Gcsb.Connect.Training.Application.UseCases;
+using Gcsb.Connect.Training.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,11 @@ namespace Gcsb.Connect.Training.Application.Repositories.Services
 {
     public interface ICustomerService
     {
-        Task<List<CustomerDTO>> GetCustomers();
-        Task<CustomerDTO> GetCustomersById(Guid? Id);
-        Task<CustomerDTO> GetCustomersByName(string Name);
-        Task<CustomerDTO> GetCustomersByCpf(string Cpf);
+        List<CustomerResponse> GetCustomers();
+        CustomerResponse GetCustomersById(Guid? Id);
+        CustomerResponse GetCustomersByCpf(string Cpf);
         void AddCustomer(CustomerDTO customer);
-        void UpdateCustomer(CustomerDTO customer);
-        void DeleteCustomer(Guid Id);
+        void UpdateCustomer(EditCustomerDTO customer, CustomerResponse verify);
+        void DeleteCustomer(CustomerResponse customer);
     }
 }

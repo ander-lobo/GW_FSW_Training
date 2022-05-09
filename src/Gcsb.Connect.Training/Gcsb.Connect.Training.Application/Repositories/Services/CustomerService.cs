@@ -13,54 +13,49 @@ namespace Gcsb.Connect.Training.Application.Repositories.Services
     public class CustomerService : ICustomerService
     {
         private ICustomerRepository _customerRepository;
-        private readonly IMapper _mapper;
+        private readonly IMapper mapper;
 
         public CustomerService(IMapper mapper, ICustomerRepository customerRepository)
         {
-            _mapper = mapper;
+            this.mapper = mapper;
             _customerRepository = customerRepository;
         }
 
-        public async Task<List<CustomerDTO>> GetCustomers()
+        public List<CustomerResponse> GetCustomers()
         {
-            var result = await _customerRepository.GetCustomers();
-            return _mapper.Map<List<CustomerDTO>>(result);
+            var result = _customerRepository.GetCustomers();
+            return mapper.Map<List<CustomerResponse>>(result);
         }
 
-        public async Task<CustomerDTO> GetCustomersById(Guid? Id)
+        public CustomerResponse GetCustomersById(Guid? Id)
         {
-            var result = await _customerRepository.GetCustomersById(Id);
-            return _mapper.Map<CustomerDTO>(result);
+            var result = _customerRepository.GetCustomersById(Id);
+            return mapper.Map<CustomerResponse>(result);
         }
 
-        public async Task<CustomerDTO> GetCustomersByName(string Name)
+        public CustomerResponse GetCustomersByCpf(string Cpf)
         {
-            var result = await _customerRepository.GetCustomersByName(Name);
-            return _mapper.Map<CustomerDTO>(result);
-        }
-
-        public async Task<CustomerDTO> GetCustomersByCpf(string Cpf)
-        {
-            var result = await _customerRepository.GetCustomersByCpf(Cpf);
-            return _mapper.Map<CustomerDTO>(result);
+            var result = _customerRepository.GetCustomersByCpf(Cpf);
+            return mapper.Map<CustomerResponse>(result);
         }
 
         public void AddCustomer(CustomerDTO customer)
         {
-            var mapCustomer = _mapper.Map<Customer>(customer);
+            var mapCustomer = mapper.Map<Customer>(customer);
             _customerRepository.AddCustomer(mapCustomer);
         }
 
-        public void UpdateCustomer(CustomerDTO customer)
+        public void UpdateCustomer(EditCustomerDTO customer, CustomerResponse verify)
         {
-            var mapCustomer = _mapper.Map<Customer>(customer);
-            _customerRepository.UpdateCustomer(mapCustomer);
+            var mapCustomer = mapper.Map<Customer>(customer);
+            var mapVerify = mapper.Map<Customer>(verify);
+            _customerRepository.UpdateCustomer(mapCustomer, mapVerify);
         }
 
-        public void DeleteCustomer(string Cpf)
+        public void DeleteCustomer(CustomerResponse customer)
         {
-            var customer = _customerRepository.GetCustomersByCpf(Cpf).Result;
-            _customerRepository.DeleteCustomer(customer);
+            var mapCustomer = mapper.Map<Customer>(customer);
+            _customerRepository.DeleteCustomer(mapCustomer);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Gcsb.Connect.Training.Domain.Entities;
+﻿using Gcsb.Connect.Training.Application.UseCases;
+using Gcsb.Connect.Training.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,11 @@ namespace Gcsb.Connect.Training.Application.Repositories.Database
 {
     public interface ICustomerRepository
     {
-        Task<List<Customer>> GetCustomers();
-        Task<Customer> GetCustomersById(Guid? Id);
-        Task<Customer> GetCustomersByName(string Name);
-        Task<Customer> GetCustomersByCpf(string Cpf);
+        List<Customer> GetCustomers();
+        Customer GetCustomersById(Guid? Id);
+        Customer GetCustomersByCpf(string Cpf);
         void AddCustomer(Customer customer);
-        void UpdateCustomer(Customer customer);
+        void UpdateCustomer(Customer customer, Customer verify);
         void DeleteCustomer(Customer customer);
     }
 }

@@ -2,7 +2,7 @@
 {
     public class DomainException : Exception
     {
-        internal DomainException(string businessMessage)
+        public DomainException(string businessMessage)
             : base(businessMessage)
         {
 

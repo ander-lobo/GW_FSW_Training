@@ -3,6 +3,7 @@ using Autofac.Configuration;
 using Autofac.Extensions.DependencyInjection;
 using Gcsb.Connect.Pkg.Startup.Webapi.DependencyInjection;
 using Gcsb.Connect.Pkg.Startup.Webapi.Resources;
+using Gcsb.Connect.Pkg.Serilog.Implementation;
 using Gcsb.Connect.Training.Webapi.DependencyInjection;
 using Gcsb.Connect.Training.Webapi.Pipeline;
 using Hellang.Middleware.ProblemDetails;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Localization;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
+using System.Reflection;
 
 namespace Gcsb.Connect.Training.Webapi
 {
@@ -29,52 +31,66 @@ namespace Gcsb.Connect.Training.Webapi
             builder.RegisterModule(new ConfigurationModule(Configuration));
             builder.AddAutofacRegistration();
         }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add services to the container.
-            services.AddControllersWithViews();
-            services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(c => 
                 {
-                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Treinamento", Version = "v1" });
+                    c.SwaggerDoc("v1", new OpenApiInfo 
+                    { 
+                        Title = "Treinamento", Version = "v1" 
+                    });
+                    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
                 });
+            services.AddJwtToken();
             services.AddLocalization();
             services.AddVersioning();
             services.AddProblemDetails();
             services.AddCustomFilters();
             services.Cors();
+            //services.AddMvc(options => options.EnableEndpointRouting = false)
+            //    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+            //    .AddNewtonsoftJson(options =>
+            //    {
+            //        options.SerializerSettings.Converters.Add(new StringEnumConverter());
+            //        options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+            //    });
         }
 
-        public void Configure(WebApplication app, IWebHostEnvironment environment)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
-            if (app.Environment.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            app.UseHttpsRedirection();
-            app.MapControllers();
-            IServiceProvider serviceProvider = app.Services.GetRequiredService<IServiceProvider>();
-            var resources = serviceProvider.GetService<IStringLocalizer<ReturnMessages>>();
-            this.AutofacContainer = serviceProvider.GetAutofacRoot();
+
+            var serviceProvicer = app.ApplicationServices;
+            var resources = serviceProvicer.GetService<IStringLocalizer<ReturnMessages>>();
+            this.AutofacContainer = app.ApplicationServices.GetAutofacRoot();
 
             app.UseExceptionHandler(new ExceptionHandlerOptions
             {
-                ExceptionHandler = new ErrorHandlerMiddleware(environment, resources).Invoke
+                ExceptionHandler = new ErrorHandlerMiddleware(env, resources).Invoke
             });
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
+
+            app.UseMiddleware<LogRequestMiddleware>();
             app.AddLocalization();
             app.UseCors();
             app.UseProblemDetails();
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(e => e.MapControllers());
             app.AddOptions();
+            //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
     }
 }

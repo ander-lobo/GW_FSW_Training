@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   db:
-    image: postgres:9.5
+    image: postgres
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -16,11 +16,14 @@ services:
       - gcsb.connect.training.network
 
   gcsb.connect.training.webapi:
+    image: gcsb.connect.training.webapi
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: https://+:443;http://+:80
       ALLOWED_HOSTS: localhost
+      JWT_KEY: "b508f4f3-1f2b-4261-a60a-121b696be82a"
       TRAEFIK_PATH: ""
+      BASE_URI_AUTH: "https://vivo-int-dev.vivoplataformadigital.com.br"
       DBCONN: "Server=db;Port=5432;Database=postgres;User Id=postgres;Password=postgres;"
     ports:
       - 8080:80

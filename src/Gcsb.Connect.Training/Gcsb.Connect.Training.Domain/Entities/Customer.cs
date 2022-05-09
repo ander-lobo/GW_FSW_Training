@@ -32,7 +32,7 @@ namespace Gcsb.Connect.Training.Domain.Entities
             City = city;
             State = state;
             PostalCode = postalCode;
-            RegistrationDate = DateTime.Today;
+            RegistrationDate = DateTime.UtcNow;
             IsActive = true;
 
             Validate(this, new CustomerValidator());
@@ -48,8 +48,25 @@ namespace Gcsb.Connect.Training.Domain.Entities
             City = city;
             State = state;
             PostalCode = postalCode;
-            RegistrationDate = DateTime.Today;
+            RegistrationDate = DateTime.UtcNow;
             IsActive = true;
+
+            Validate(this, new CustomerValidator());
+        }
+
+        public Customer(Guid id, string name, string birthDate, string rg, string cpf, string address, string city, string state, int postalCode, DateTime registrationDate, bool isActive)
+        {
+            Id = id;
+            Name = name;
+            BirthDate = birthDate;
+            Rg = rg;
+            Cpf = Regex.Replace(cpf, "[^0-9]", "");
+            Address = address;
+            City = city;
+            State = state;
+            PostalCode = postalCode;
+            RegistrationDate = registrationDate;
+            IsActive = isActive;
 
             Validate(this, new CustomerValidator());
         }
