@@ -90,7 +90,6 @@ namespace Gcsb.Connect.Training.Webapi
             app.UseAuthorization();
             app.UseEndpoints(e => e.MapControllers());
             app.AddOptions();
-            //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
     }
 }

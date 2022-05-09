@@ -24,6 +24,10 @@ namespace Gcsb.Connect.Training.Application.UseCases
         [MaxLength(20, ErrorMessage = "Favor inserir um Rg válido.")]
         public string Rg { get; set; }
 
+        [MinLength(11, ErrorMessage = "Favor inserir um Cpf válido.")]
+        [MaxLength(14, ErrorMessage = "Favor inserir um Cpf válido.")]
+        public string Cpf { get; set; }
+
         [MinLength(3, ErrorMessage = "O endereço deve ter no mínimo 3 letras.")]
         [MaxLength(200, ErrorMessage = "Endereço muito longo.")]
         public string Address { get; set; }

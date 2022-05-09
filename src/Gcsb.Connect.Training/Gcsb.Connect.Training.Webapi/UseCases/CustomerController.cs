@@ -81,7 +81,7 @@ namespace Gcsb.Connect.Training.Webapi.UseCases
                 return BadRequest("Cliente já registrado.");
             }
             _customerService.AddCustomer(customer);
-            return Ok(customer);
+            return Created("Created", customer);
         }
 
         /// <summary>
@@ -96,7 +96,10 @@ namespace Gcsb.Connect.Training.Webapi.UseCases
             var verify = _customerService.GetCustomersById(customer.Id);
             if (verify == null)
             {
-                return BadRequest();
+                return BadRequest("Id não encontrado.");
+            } else if (verify.Cpf != customer.Cpf)
+            {
+                return BadRequest("Cpf não pode ser alterado.");
             }
             _customerService.UpdateCustomer(customer, verify);
             return Ok(customer);
@@ -105,8 +108,8 @@ namespace Gcsb.Connect.Training.Webapi.UseCases
         /// <summary>
         /// Delete Customer
         /// </summary>
-        [HttpDelete("cpf")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [HttpDelete("{cpf}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult Delete(string cpf)
         {
@@ -116,7 +119,7 @@ namespace Gcsb.Connect.Training.Webapi.UseCases
                 return NotFound("Cliente não encontrado.");
             }
             _customerService.DeleteCustomer(verify);
-            return NoContent();
+            return Ok("Id " + verify.Id + " apagado com sucesso!");
         }
 
     }
