@@ -1,6 +1,7 @@
-﻿using Gcsb.Connect.Training.Application.Repositories.Services;
-using Gcsb.Connect.Training.Application.UseCases;
+﻿using Gcsb.Connect.Training.Application.Interfaces;
 using Gcsb.Connect.Training.Domain.Entities;
+using Gcsb.Connect.Training.Webapi.UseCases.Customers.Request;
+using Gcsb.Connect.Training.Webapi.UseCases.Customers.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gcsb.Connect.Training.Webapi.UseCases
@@ -9,10 +10,23 @@ namespace Gcsb.Connect.Training.Webapi.UseCases
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly ICustomerService _customerService;
-        public CustomerController(ICustomerService customerService)
+        private readonly IGetAllUseCase getAllUseCase;
+        private readonly IGetByIdUseCase getByIdUseCase;
+        private readonly IGetByCpfUseCase getByCpfUseCase;
+        private readonly IAddUseCase addUseCase;
+        private readonly IUpdateUseCase updateUseCase;
+        private readonly IDeleteUseCase deleteUseCase;
+        private readonly CustomerPresenter presenter;
+
+        public CustomerController(IGetAllUseCase getAllUseCase, IGetByIdUseCase getByIdUseCase, IGetByCpfUseCase getByCpfUseCase, IAddUseCase addUseCase, IUpdateUseCase updateUseCase, IDeleteUseCase deleteUseCase, CustomerPresenter presenter)
         {
-            _customerService = customerService;
+            this.getAllUseCase = getAllUseCase;
+            this.getByIdUseCase = getByIdUseCase;
+            this.getByCpfUseCase = getByCpfUseCase;
+            this.addUseCase = addUseCase;
+            this.updateUseCase = updateUseCase;
+            this.deleteUseCase = deleteUseCase;
+            this.presenter = presenter;
         }
 
         /// <summary>
@@ -20,16 +34,12 @@ namespace Gcsb.Connect.Training.Webapi.UseCases
         /// </summary>
         [HttpGet]
         [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<List<CustomerResponse>> Get()
+        [ProducesResponseType(typeof(List<CustomerResponse>), 200)]
+        [ProducesResponseType(typeof(ProblemDetails), 404)]
+        public IActionResult GetAll()
         {
-            var customers = _customerService.GetCustomers();
-            if(customers == null)
-            {
-                return NotFound("Nenhum cliente encontrado.");
-            }
-            return Ok(customers);
+            getAllUseCase.Execute();
+            return presenter.Result;
         }
 
         /// <summary>
@@ -37,16 +47,12 @@ namespace Gcsb.Connect.Training.Webapi.UseCases
         /// </summary>
         [HttpGet("search/{Id}")]
         [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<CustomerResponse> Get(Guid Id)
+        [ProducesResponseType(typeof(CustomerResponse), 200)]
+        [ProducesResponseType(typeof(ProblemDetails), 404)]
+        public IActionResult GetById(Guid Id)
         {
-            var customer = _customerService.GetCustomersById(Id);
-            if (customer == null)
-            {
-                return NotFound("Cliente não encontrado.");
-            }
-            return Ok(customer);
+            getByIdUseCase.Execute(Id);
+            return presenter.Result;
         }
 
         /// <summary>
@@ -54,16 +60,12 @@ namespace Gcsb.Connect.Training.Webapi.UseCases
         /// </summary>
         [HttpGet("{cpf}")]
         [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<CustomerResponse> Get(string cpf)
+        [ProducesResponseType(typeof(CustomerResponse), 200)]
+        [ProducesResponseType(typeof(ProblemDetails), 404)]
+        public IActionResult GetByCpf(string cpf)
         {
-            var customer = _customerService.GetCustomersByCpf(cpf);
-            if (customer == null)
-            {
-                return NotFound("Cliente não encontrado.");
-            }
-            return Ok(customer);
+            getByCpfUseCase.Execute(cpf);
+            return presenter.Result;
         }
 
         /// <summary>
@@ -71,17 +73,13 @@ namespace Gcsb.Connect.Training.Webapi.UseCases
         /// </summary>
         [HttpPost]
         [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult Post([FromBody] CustomerDTO customer)
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(ProblemDetails), 400)]
+        public IActionResult Post([FromBody] CustomerRequest body)
         {
-            var verify = _customerService.GetCustomersByCpf(customer.Cpf);
-            if (verify != null)
-            {
-                return BadRequest("Cliente já registrado.");
-            }
-            _customerService.AddCustomer(customer);
-            return Created("Created", customer);
+            Customer customer = new(body.Name, body.BirthDate, body.Rg, body.Cpf, body.Address, body.City, body.State, body.PostalCode);
+            addUseCase.Execute(customer);
+            return presenter.Result;
         }
 
         /// <summary>
@@ -89,37 +87,25 @@ namespace Gcsb.Connect.Training.Webapi.UseCases
         /// </summary>
         [HttpPut]
         [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult Put([FromBody] EditCustomerDTO customer)
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(ProblemDetails), 400)]
+        public IActionResult Put([FromBody] UpdateCustomerRequest body)
         {
-            var verify = _customerService.GetCustomersById(customer.Id);
-            if (verify == null)
-            {
-                return BadRequest("Id não encontrado.");
-            } else if (verify.Cpf != customer.Cpf)
-            {
-                return BadRequest("Cpf não pode ser alterado.");
-            }
-            _customerService.UpdateCustomer(customer, verify);
-            return Ok(customer);
+            Customer customer = new(body.Id, body.Name, body.BirthDate, body.Rg, body.Cpf, body.Address, body.City, body.State, body.PostalCode);
+            updateUseCase.Execute(customer);
+            return presenter.Result;
         }
 
         /// <summary>
         /// Delete Customer
         /// </summary>
         [HttpDelete("{cpf}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult Delete(string cpf)
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(ProblemDetails), 404)]
+        public IActionResult Delete(string cpf)
         {
-            var verify = _customerService.GetCustomersByCpf(cpf);
-            if (verify == null)
-            {
-                return NotFound("Cliente não encontrado.");
-            }
-            _customerService.DeleteCustomer(verify);
-            return Ok("Id " + verify.Id + " apagado com sucesso!");
+            deleteUseCase.Execute(cpf);
+            return presenter.Result;
         }
 
     }

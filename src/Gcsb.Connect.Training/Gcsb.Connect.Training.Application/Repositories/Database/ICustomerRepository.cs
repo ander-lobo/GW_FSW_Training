@@ -13,8 +13,8 @@ namespace Gcsb.Connect.Training.Application.Repositories.Database
         List<Customer> GetCustomers();
         Customer GetCustomersById(Guid? Id);
         Customer GetCustomersByCpf(string Cpf);
-        void AddCustomer(Customer customer);
-        void UpdateCustomer(Customer customer, Customer verify);
+        Guid AddCustomer(Customer customer);
+        void UpdateCustomer(Customer customer);
         void DeleteCustomer(Customer customer);
     }
 }

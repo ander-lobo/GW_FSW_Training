@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gcsb.Connect.Training.Application.UseCases
+namespace Gcsb.Connect.Training.Webapi.UseCases.Customers.Request
 {
-    public class CustomerDTO
+    public class CustomerRequest
     {
         [Required(ErrorMessage = "O nome é obrigatório.")]
         [MinLength(3, ErrorMessage = "O nome deve ter no mínimo 3 letras.")]

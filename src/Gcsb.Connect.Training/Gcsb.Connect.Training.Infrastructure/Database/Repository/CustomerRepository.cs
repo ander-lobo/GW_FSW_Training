@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using Gcsb.Connect.Training.Application.UseCases;
 
 namespace Gcsb.Connect.Training.Infrastructure.Database.Repository
 {
@@ -41,33 +40,17 @@ namespace Gcsb.Connect.Training.Infrastructure.Database.Repository
             return mapper.Map<Customer>(customer);
         }
 
-        public void AddCustomer(Customer customer)
+        public Guid AddCustomer(Customer customer)
         {
             using var context = new Context();
             context.Add(mapper.Map<Entities.Customer>(customer));
             context.SaveChanges();
+            return customer.Id;
         }
-        public void UpdateCustomer(Customer customer, Customer verify)
+        public void UpdateCustomer(Customer customer)
         {
             using var context = new Context();
-            var cep = verify.PostalCode;
-            if(customer.PostalCode != verify.PostalCode) { cep = customer.PostalCode; };
-            Entities.Customer edit = new()
-            {
-                Id = customer.Id,
-                Name = string.IsNullOrEmpty(customer.Name) ? verify.Name : customer.Name,
-                BirthDate = string.IsNullOrEmpty(customer.BirthDate) ? verify.BirthDate : customer.BirthDate,
-                Rg = string.IsNullOrEmpty(customer.Rg) ? verify.Rg : customer.Rg,
-                Cpf = verify.Cpf,
-                Address = string.IsNullOrEmpty(customer.Address) ? verify.Address : customer.Address,
-                City = string.IsNullOrEmpty(customer.City) ? verify.City : customer.City,
-                State = string.IsNullOrEmpty(customer.State) ? verify.State : customer.State,
-                PostalCode = cep,
-                RegistrationDate = verify.RegistrationDate,
-                IsActive = verify.IsActive
-            };
-            var mapped = mapper.Map<Entities.Customer>(edit);
-            context.Update(mapped);
+            context.Update(mapper.Map<Entities.Customer>(customer));
             context.SaveChanges();
         }
 
