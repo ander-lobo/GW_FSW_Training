@@ -27,7 +27,7 @@ namespace Gcsb.Connect.Training.Domain.Entities
             Name = name;
             BirthDate = birthDate;
             Rg = rg;
-            Cpf = Regex.Replace(cpf, "[^0-9]", "");
+            Cpf = !string.IsNullOrEmpty(cpf) ? Regex.Replace(cpf, "[^0-9]", "") : "";
             Address = address;
             City = city;
             State = state;
@@ -43,7 +43,7 @@ namespace Gcsb.Connect.Training.Domain.Entities
             Name = name;
             BirthDate = birthDate;
             Rg = rg;
-            Cpf = Regex.Replace(cpf, "[^0-9]", "");
+            Cpf = !string.IsNullOrEmpty(cpf) ? Regex.Replace(cpf, "[^0-9]", "") : "";
             Address = address;
             City = city;
             State = state;
@@ -60,7 +60,7 @@ namespace Gcsb.Connect.Training.Domain.Entities
             Name = name;
             BirthDate = birthDate;
             Rg = rg;
-            Cpf = Regex.Replace(cpf, "[^0-9]", "");
+            Cpf = !string.IsNullOrEmpty(cpf) ? Regex.Replace(cpf, "[^0-9]", "") : "";
             Address = address;
             City = city;
             State = state;

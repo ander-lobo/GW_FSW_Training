@@ -11,8 +11,8 @@ namespace Gcsb.Connect.Training.Application.Repositories.Database
     public interface ICustomerRepository
     {
         List<Customer> GetCustomers();
-        Customer GetCustomersById(Guid? Id);
-        Customer GetCustomersByCpf(string Cpf);
+        Customer GetCustomersById(Guid id);
+        Customer GetCustomersByCpf(string cpf);
         Guid AddCustomer(Customer customer);
         void UpdateCustomer(Customer customer);
         void DeleteCustomer(Customer customer);

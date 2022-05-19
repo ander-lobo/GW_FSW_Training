@@ -9,16 +9,16 @@
 
   <ItemGroup>
 	<PackageReference Include="Autofac" Version="6.3.0" />
-	<PackageReference Include="FluentAssertions" Version="5.10.2" />
-	<PackageReference Include="Moq" Version="4.16.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+	<PackageReference Include="FluentAssertions" Version="6.7.0" />
+	<PackageReference Include="Moq" Version="4.18.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
-	<PackageReference Include="xunit.frameworks.autofac" Version="0.1.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+	<PackageReference Include="xunit.frameworks.autofac" Version="0.5.4" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="coverlet.collector" Version="3.1.0">
+    <PackageReference Include="coverlet.collector" Version="3.1.2">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
@@ -32,10 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Builders\" />
-    <Folder Include="Cases\Application\" />
-    <Folder Include="Cases\Domain\" />
-    <Folder Include="Cases\Infrastructure\" />
     <Folder Include="Cases\Webapi\" />
     <Folder Include="Mocks\" />
   </ItemGroup>

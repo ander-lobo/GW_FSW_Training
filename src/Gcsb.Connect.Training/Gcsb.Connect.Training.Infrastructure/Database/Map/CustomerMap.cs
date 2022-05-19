@@ -22,6 +22,7 @@ namespace Gcsb.Connect.Training.Infrastructure.Database.Map
             builder.Property(c => c.City).HasMaxLength(30).IsRequired();
             builder.Property(c => c.State).HasMaxLength(2).IsRequired();
             builder.Property(c => c.PostalCode).IsRequired();
+            builder.HasIndex(c => c.Cpf).IsUnique();
         }
     }
 }

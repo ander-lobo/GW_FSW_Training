@@ -26,17 +26,17 @@ namespace Gcsb.Connect.Training.Infrastructure.Database.Repository
             return mapper.Map<List<Customer>>(customers);
         }
 
-        public Customer GetCustomersById(Guid? Id)
+        public Customer GetCustomersById(Guid id)
         {
             using var context = new Context();
-            var customer = context.Customers.Find(Id);
+            var customer = context.Customers.Find(id);
             return mapper.Map<Customer>(customer);
         }
 
-        public Customer GetCustomersByCpf(string? Cpf)
+        public Customer GetCustomersByCpf(string cpf)
         {
             using var context = new Context();
-            var customer = context.Customers.FirstOrDefault(c => c.Cpf.Equals(Cpf));
+            var customer = context.Customers.FirstOrDefault(c => c.Cpf.Equals(cpf));
             return mapper.Map<Customer>(customer);
         }
 
