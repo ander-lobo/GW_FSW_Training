@@ -1,6 +1,9 @@
-﻿using Gcsb.Connect.Training.Application.Interfaces;
+﻿using FluentAssertions;
+using Gcsb.Connect.Training.Application.Interfaces;
 using Gcsb.Connect.Training.Application.Repositories.Database;
+using Gcsb.Connect.Training.Tests.Builders;
 using Gcsb.Connect.Training.Webapi.UseCases;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +21,6 @@ namespace Gcsb.Connect.Training.Tests.Cases.Application.Customer
         private readonly IDeleteUseCase deleteUseCase;
         private readonly CustomerPresenter presenter;
         private readonly ICustomerRepository customerRepository;
-        private static Guid Id;
 
         public DeleteUseCaseTest(IDeleteUseCase deleteUseCase, CustomerPresenter presenter, ICustomerRepository customerRepository)
         {
@@ -27,6 +29,14 @@ namespace Gcsb.Connect.Training.Tests.Cases.Application.Customer
             this.customerRepository = customerRepository;
         }
 
-
+        [Fact(DisplayName = "Should Delete Customer")]
+        public void ShouldExecute()
+        {
+            var cpf = "56789012345";
+            var customer = CustomerBuilder.New().WithCpf(cpf).Build();
+            customerRepository.AddCustomer(customer);
+            deleteUseCase.Execute(cpf);
+            presenter.Result.Should().BeOfType<OkObjectResult>();
+        }
     }
 }

@@ -1,6 +1,9 @@
-﻿using Gcsb.Connect.Training.Application.Interfaces;
+﻿using FluentAssertions;
+using Gcsb.Connect.Training.Application.Interfaces;
 using Gcsb.Connect.Training.Application.Repositories.Database;
+using Gcsb.Connect.Training.Tests.Builders;
 using Gcsb.Connect.Training.Webapi.UseCases;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +21,6 @@ namespace Gcsb.Connect.Training.Tests.Cases.Application.Customer
         private readonly IGetByIdUseCase getByIdUseCase;
         private readonly CustomerPresenter presenter;
         private readonly ICustomerRepository customerRepository;
-        private static Guid Id;
 
         public GetByIdUseCaseTest(IGetByIdUseCase getByIdUseCase, CustomerPresenter presenter, ICustomerRepository customerRepository)
         {
@@ -27,6 +29,14 @@ namespace Gcsb.Connect.Training.Tests.Cases.Application.Customer
             this.customerRepository = customerRepository;
         }
 
-
+        [Fact(DisplayName = "Should Get Customer By Id")]
+        public void ShouldExecute()
+        {
+            var idCustomer = Guid.NewGuid();
+            var customer = CustomerBuilder.New().WithId(idCustomer).Build();
+            customerRepository.AddCustomer(customer);
+            getByIdUseCase.Execute(idCustomer);
+            presenter.Result.Should().BeOfType<OkObjectResult>();
+        }
     }
 }

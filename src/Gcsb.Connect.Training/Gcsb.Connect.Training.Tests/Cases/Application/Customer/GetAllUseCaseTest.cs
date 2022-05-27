@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Gcsb.Connect.Training.Application.Interfaces;
 using Gcsb.Connect.Training.Application.Repositories.Database;
+using Gcsb.Connect.Training.Tests.Builders;
 using Gcsb.Connect.Training.Webapi.UseCases;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,7 +21,6 @@ namespace Gcsb.Connect.Training.Tests.Cases.Application.Customer
         private readonly IGetAllUseCase getAllUseCase;
         private readonly CustomerPresenter presenter;
         private readonly ICustomerRepository customerRepository;
-        private static Guid Id;
 
         public GetAllUseCaseTest(IGetAllUseCase getAllUseCase, CustomerPresenter presenter, ICustomerRepository customerRepository)
         {
@@ -29,9 +29,18 @@ namespace Gcsb.Connect.Training.Tests.Cases.Application.Customer
             this.customerRepository = customerRepository;
         }
 
-        [Fact]
+        [Fact(DisplayName = "Should Get All Customers")]
         public void ShouldExecute()
         {
+            var idCustomer1 = Guid.NewGuid();
+            var idCustomer2 = Guid.NewGuid();
+            var idCustomer3 = Guid.NewGuid();
+            var customer1 = CustomerBuilder.New().WithId(idCustomer1).WithCpf("12345678909").Build();
+            var customer2 = CustomerBuilder.New().WithId(idCustomer2).WithCpf("12345678908").Build();
+            var customer3 = CustomerBuilder.New().WithId(idCustomer3).WithCpf("12345678907").Build();
+            customerRepository.AddCustomer(customer1);
+            customerRepository.AddCustomer(customer2);
+            customerRepository.AddCustomer(customer3);
             getAllUseCase.Execute();
             presenter.Result.Should().BeOfType<OkObjectResult>();
         }

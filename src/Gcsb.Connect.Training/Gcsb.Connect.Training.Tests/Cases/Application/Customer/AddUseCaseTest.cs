@@ -1,6 +1,9 @@
-﻿using Gcsb.Connect.Training.Application.Interfaces;
+﻿using FluentAssertions;
+using Gcsb.Connect.Training.Application.Interfaces;
 using Gcsb.Connect.Training.Application.Repositories.Database;
+using Gcsb.Connect.Training.Tests.Builders;
 using Gcsb.Connect.Training.Webapi.UseCases;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,16 +20,19 @@ namespace Gcsb.Connect.Training.Tests.Cases.Application.Customer
     {
         private readonly IAddUseCase addUseCase;
         private readonly CustomerPresenter presenter;
-        private readonly ICustomerRepository customerRepository;
-        private static Guid Id;
 
-        public AddUseCaseTest(IAddUseCase addUseCase, CustomerPresenter presenter, ICustomerRepository customerRepository)
+        public AddUseCaseTest(IAddUseCase addUseCase, CustomerPresenter presenter)
         {
             this.addUseCase = addUseCase;
             this.presenter = presenter;
-            this.customerRepository = customerRepository;
         }
 
-
+        [Fact(DisplayName = "Should Create Customer")]
+        public void ShouldExecute()
+        {
+            var customer = CustomerBuilder.New().WithCpf("34567890123").Build();
+            addUseCase.Execute(customer);
+            presenter.Result.Should().BeOfType<OkObjectResult>();
+        }
     }
 }

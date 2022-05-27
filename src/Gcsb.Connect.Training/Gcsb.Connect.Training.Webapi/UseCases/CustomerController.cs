@@ -75,7 +75,7 @@ namespace Gcsb.Connect.Training.Webapi.UseCases
         [Produces("application/json")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(ProblemDetails), 400)]
-        public IActionResult Post([FromBody] CustomerRequest body)
+        public IActionResult Add([FromBody] CustomerRequest body)
         {
             Customer customer = new(body.Name, body.BirthDate, body.Rg, body.Cpf, body.Address, body.City, body.State, body.PostalCode);
             addUseCase.Execute(customer);
@@ -89,7 +89,7 @@ namespace Gcsb.Connect.Training.Webapi.UseCases
         [Produces("application/json")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(ProblemDetails), 400)]
-        public IActionResult Put([FromBody] UpdateCustomerRequest body)
+        public IActionResult Update([FromBody] UpdateCustomerRequest body)
         {
             Customer customer = new(body.Id, body.Name, body.BirthDate, body.Rg, body.Cpf, body.Address, body.City, body.State, body.PostalCode);
             updateUseCase.Execute(customer);
