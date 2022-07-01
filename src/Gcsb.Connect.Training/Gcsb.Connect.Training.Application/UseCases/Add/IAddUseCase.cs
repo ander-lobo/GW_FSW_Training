@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gcsb.Connect.Training.Application.Interfaces
+namespace Gcsb.Connect.Training.Application.UseCases.Add
 {
-    public interface IGetByIdUseCase
+    public interface IAddUseCase
     {
-        void Execute(Guid Id);
+        void Execute(Customer customer);
     }
 }

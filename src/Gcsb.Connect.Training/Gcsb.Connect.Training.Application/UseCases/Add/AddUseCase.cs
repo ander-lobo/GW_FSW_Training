@@ -1,5 +1,4 @@
 ﻿using Gcsb.Connect.Training.Application.Boundaries;
-using Gcsb.Connect.Training.Application.Interfaces;
 using Gcsb.Connect.Training.Application.Repositories.Database;
 using Gcsb.Connect.Training.Domain.Entities;
 using System;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gcsb.Connect.Training.Application.UseCases
+namespace Gcsb.Connect.Training.Application.UseCases.Add
 {
     public class AddUseCase : IAddUseCase
     {
@@ -27,7 +26,8 @@ namespace Gcsb.Connect.Training.Application.UseCases
             {
                 var response = repository.AddCustomer(customer);
                 outputPort.Standard("Cliente registrado com sucesso com o Id: " + response);
-            } else
+            }
+            else
             {
                 outputPort.Error("Cliente já existente com o Id: " + verify.Id);
             }

@@ -1,6 +1,11 @@
 ﻿using FluentAssertions;
-using Gcsb.Connect.Training.Application.Interfaces;
 using Gcsb.Connect.Training.Application.Repositories.Database;
+using Gcsb.Connect.Training.Application.UseCases.Add;
+using Gcsb.Connect.Training.Application.UseCases.Delete;
+using Gcsb.Connect.Training.Application.UseCases.GetAll;
+using Gcsb.Connect.Training.Application.UseCases.GetByCpf;
+using Gcsb.Connect.Training.Application.UseCases.GetById;
+using Gcsb.Connect.Training.Application.UseCases.Update;
 using Gcsb.Connect.Training.Tests.Builders;
 using Gcsb.Connect.Training.Tests.TestCaseOrdering;
 using Gcsb.Connect.Training.Webapi.UseCases;

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gcsb.Connect.Training.Application.Interfaces
+namespace Gcsb.Connect.Training.Application.UseCases.Update
 {
-    public interface IAddUseCase
+    public interface IUpdateUseCase
     {
         void Execute(Customer customer);
     }

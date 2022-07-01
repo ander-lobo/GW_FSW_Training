@@ -1,5 +1,4 @@
 ﻿using Gcsb.Connect.Training.Application.Boundaries;
-using Gcsb.Connect.Training.Application.Interfaces;
 using Gcsb.Connect.Training.Application.Repositories.Database;
 using Gcsb.Connect.Training.Domain.Entities;
 using System;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gcsb.Connect.Training.Application.UseCases
+namespace Gcsb.Connect.Training.Application.UseCases.Update
 {
     public class UpdateUseCase : IUpdateUseCase
     {

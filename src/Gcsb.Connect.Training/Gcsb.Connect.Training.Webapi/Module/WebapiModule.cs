@@ -9,12 +9,7 @@ namespace Gcsb.Connect.Training.Webapi.Module
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(typeof(Program).Assembly).AsImplementedInterfaces().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<CustomerPresenter>()
-                .As<IOutputPort<List<Customer>>>()
-                .As<IOutputPort<Customer>>()
-                .As<IOutputPort<string>>()
-                .AsImplementedInterfaces().InstancePerLifetimeScope().AsSelf();
+            builder.RegisterType<CustomerPresenter>().AsImplementedInterfaces().InstancePerLifetimeScope().AsSelf();
         }
     }
 }

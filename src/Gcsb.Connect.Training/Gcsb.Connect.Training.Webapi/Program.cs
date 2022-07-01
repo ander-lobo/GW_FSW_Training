@@ -2,16 +2,12 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Gcsb.Connect.Pkg.Serilog.Implementation;
 using Gcsb.Connect.Pkg.Startup.Webapi.DependencyInjection;
-using Gcsb.Connect.Pkg.Startup.Webapi.Filters;
-using Gcsb.Connect.Pkg.Startup.Webapi.Pipeline;
 using Gcsb.Connect.Pkg.Startup.Webapi.Resources;
 using Gcsb.Connect.Training.Webapi.DependencyInjection;
-using Gcsb.Connect.Training.Webapi.Filters;
 using Gcsb.Connect.Training.Webapi.Pipeline;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -29,7 +25,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Treinamento",
+        Title = "Training",
         Version = "v1"
     });
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

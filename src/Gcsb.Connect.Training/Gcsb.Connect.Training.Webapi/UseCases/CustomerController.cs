@@ -1,4 +1,9 @@
-﻿using Gcsb.Connect.Training.Application.Interfaces;
+﻿using Gcsb.Connect.Training.Application.UseCases.Add;
+using Gcsb.Connect.Training.Application.UseCases.Delete;
+using Gcsb.Connect.Training.Application.UseCases.GetAll;
+using Gcsb.Connect.Training.Application.UseCases.GetByCpf;
+using Gcsb.Connect.Training.Application.UseCases.GetById;
+using Gcsb.Connect.Training.Application.UseCases.Update;
 using Gcsb.Connect.Training.Domain.Entities;
 using Gcsb.Connect.Training.Webapi.UseCases.Customers.Request;
 using Gcsb.Connect.Training.Webapi.UseCases.Customers.Response;

@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using Gcsb.Connect.Training.Application.Interfaces;
 using Gcsb.Connect.Training.Application.Repositories.Database;
+using Gcsb.Connect.Training.Application.UseCases.GetById;
 using Gcsb.Connect.Training.Tests.Builders;
 using Gcsb.Connect.Training.Webapi.UseCases;
 using Microsoft.AspNetCore.Mvc;

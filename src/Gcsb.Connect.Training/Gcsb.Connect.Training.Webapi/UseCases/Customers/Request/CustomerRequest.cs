@@ -9,40 +9,40 @@ namespace Gcsb.Connect.Training.Webapi.UseCases.Customers.Request
 {
     public class CustomerRequest
     {
-        [Required(ErrorMessage = "O nome é obrigatório.")]
-        [MinLength(3, ErrorMessage = "O nome deve ter no mínimo 3 letras.")]
-        [MaxLength(100, ErrorMessage = "Nome muito longo.")]
+        [Required(ErrorMessage = "Name is required.")]
+        [MinLength(3, ErrorMessage = "Name is too short.")]
+        [MaxLength(100, ErrorMessage = "Name is too long.")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "A data de nascimento é obrigatória.")]
-        [MinLength(3, ErrorMessage = "Favor inserir uma data válida.")]
-        [MaxLength(10, ErrorMessage = "Favor inserir uma data válida.")]
+        [Required(ErrorMessage = "BirthDate is required.")]
+        [MinLength(3, ErrorMessage = "BirthDate is too short.")]
+        [MaxLength(10, ErrorMessage = "BirthDate is too long.")]
         public string BirthDate { get; set; }
 
-        [Required(ErrorMessage = "O Rg é obrigatório.")]
-        [MinLength(3, ErrorMessage = "Favor inserir um Rg válido.")]
-        [MaxLength(20, ErrorMessage = "Favor inserir um Rg válido.")]
+        [Required(ErrorMessage = "Rg is required.")]
+        [MinLength(3, ErrorMessage = "Rg is too short.")]
+        [MaxLength(20, ErrorMessage = "Rg is too long.")]
         public string Rg { get; set; }
 
-        [Required(ErrorMessage = "O Cpf é obrigatório.")]
-        [MinLength(11, ErrorMessage = "Favor inserir um Cpf válido.")]
-        [MaxLength(14, ErrorMessage = "Favor inserir um Cpf válido.")]
+        [Required(ErrorMessage = "Cpf is required.")]
+        [MinLength(11, ErrorMessage = "Cpf is too short.")]
+        [MaxLength(14, ErrorMessage = "Cpf is too long.")]
         public string Cpf { get; set; }
 
-        [Required(ErrorMessage = "O endereço é obrigatório.")]
-        [MinLength(3, ErrorMessage = "O endereço deve ter no mínimo 3 letras.")]
-        [MaxLength(200, ErrorMessage = "Endereço muito longo.")]
+        [Required(ErrorMessage = "Address is required.")]
+        [MinLength(3, ErrorMessage = "Address is too short.")]
+        [MaxLength(200, ErrorMessage = "Address is too long.")]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "O nome da cidade é obrigatório.")]
-        [MinLength(3, ErrorMessage = "O nome da cidade deve ter no mínimo 3 letras.")]
-        [MaxLength(30, ErrorMessage = "Endereço muito longo.")]
+        [Required(ErrorMessage = "City is required.")]
+        [MinLength(3, ErrorMessage = "City is too short.")]
+        [MaxLength(30, ErrorMessage = "City is too long.")]
         public string City { get; set; }
 
-        [Required(ErrorMessage = "O nome do estado é obrigatório.")]
+        [Required(ErrorMessage = "State is required.")]
         public string State { get; set; }
 
-        [Required(ErrorMessage = "O cep é obrigatório.")]
+        [Required(ErrorMessage = "PostalCode is required.")]
         public int PostalCode { get; set; }
     }
 }

@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gcsb.Connect.Training.Application.Interfaces
+namespace Gcsb.Connect.Training.Application.UseCases.GetByCpf
 {
-    public interface IDeleteUseCase
+    public interface IGetByCpfUseCase
     {
-        void Execute(string cpf);
+        void Execute(string Cpf);
     }
 }

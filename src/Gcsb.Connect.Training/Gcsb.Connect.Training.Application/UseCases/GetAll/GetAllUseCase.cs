@@ -1,5 +1,4 @@
 ﻿using Gcsb.Connect.Training.Application.Boundaries;
-using Gcsb.Connect.Training.Application.Interfaces;
 using Gcsb.Connect.Training.Application.Repositories.Database;
 using Gcsb.Connect.Training.Domain.Entities;
 using System;
@@ -8,25 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gcsb.Connect.Training.Application.UseCases
+namespace Gcsb.Connect.Training.Application.UseCases.GetAll
 {
-    public class GetByIdUseCase : IGetByIdUseCase
+    public class GetAllUseCase : IGetAllUseCase
     {
         private readonly ICustomerRepository repository;
-        private readonly IOutputPort<Customer> outputPort;
-        public GetByIdUseCase(ICustomerRepository repository, IOutputPort<Customer> outputPort)
+        private readonly IOutputPort<List<Customer>> outputPort;
+        public GetAllUseCase(ICustomerRepository repository, IOutputPort<List<Customer>> outputPort)
         {
             this.repository = repository;
             this.outputPort = outputPort;
         }
 
-        public void Execute(Guid Id)
+        public void Execute()
         {
-            var result = repository.GetCustomersById(Id);
+            var result = repository.GetCustomers();
             if (result != null)
             {
                 outputPort.Standard(result);
-            } else
+            }
+            else
             {
                 outputPort.NotFound("Nenhum cliente encontrado!");
             }

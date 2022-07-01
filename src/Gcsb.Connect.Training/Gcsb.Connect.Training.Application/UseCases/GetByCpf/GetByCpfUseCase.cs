@@ -1,5 +1,4 @@
 ﻿using Gcsb.Connect.Training.Application.Boundaries;
-using Gcsb.Connect.Training.Application.Interfaces;
 using Gcsb.Connect.Training.Application.Repositories.Database;
 using Gcsb.Connect.Training.Domain.Entities;
 using System;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gcsb.Connect.Training.Application.UseCases
+namespace Gcsb.Connect.Training.Application.UseCases.GetByCpf
 {
     public class GetByCpfUseCase : IGetByCpfUseCase
     {
@@ -26,7 +25,8 @@ namespace Gcsb.Connect.Training.Application.UseCases
             if (result != null)
             {
                 outputPort.Standard(result);
-            } else
+            }
+            else
             {
                 outputPort.NotFound("Nenhum cliente encontrado!");
             }
